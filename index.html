@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project 56: 週五放學山海特攻</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #d35400;
+      /* 九份紅燈籠 */
+      --secondary: #f39c12;
+      /* 金瓜石金礦 */
+      --accent: #2980b9;
+      /* 基隆山海景 */
+      --bg: #fdfbf7;
+      --text: #2c3e50;
+      --card-bg: #ffffff;
+    }
+
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, var(--text), var(--primary));
+      color: white;
+      padding: 3rem 1rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      /* 新增：讓 Logo 與標題垂直置中 */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* 新增：Logo 樣式 */
+    .header-logo {
+      height: 60px;
+      /* 調整 Logo 高度 */
+      margin-bottom: 15px;
+      /* 與標題的間距 */
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin-top: 10px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: var(--secondary);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    /* Container */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Summary Cards */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .stat-box {
+      background: var(--card-bg);
+      padding: 15px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      border-bottom: 4px solid var(--accent);
+    }
+
+    .stat-box i {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 5px;
+    }
+
+    .stat-box span {
+      display: block;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding: 20px 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #e0e0e0;
+      border-radius: 2px;
+    }
+
+    .event {
+      position: relative;
+      margin-bottom: 40px;
+      padding-left: 60px;
+    }
+
+    .event::before {
+      content: '';
+      position: absolute;
+      left: 12px;
+      top: 5px;
+      width: 20px;
+      height: 20px;
+      background: var(--card-bg);
+      border: 4px solid var(--primary);
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .time {
+      font-weight: bold;
+      color: var(--primary);
+      font-size: 1.1rem;
+      margin-bottom: 5px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .note {
+      background: #fff3cd;
+      color: #856404;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      margin-top: 10px;
+      border-left: 4px solid #ffeeba;
+    }
+
+    /* Section Titles */
+    .section-title {
+      border-left: 5px solid var(--secondary);
+      padding-left: 15px;
+      margin: 40px 0 20px;
+      color: var(--text);
+    }
+
+    /* Images Placeholders */
+    .img-placeholder {
+      width: 100%;
+      height: 200px;
+      background: #eee;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+      margin-top: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: #7f8c8d;
+      font-size: 0.9rem;
+      border-top: 1px solid #eee;
+      margin-top: 40px;
+      /* 新增：讓 Logo 與文字垂直置中 */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* 新增：Footer Logo 樣式 */
+    .footer-logo {
+      height: 40px;
+      /* 調整 Logo 高度 */
+      margin-bottom: 15px;
+      /* 與文字的間距 */
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Alert Box */
+    .alert {
+      background: #d4edda;
+      color: #155724;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      border-left: 5px solid #28a745;
+    }
+
+    .alert.warning {
+      background: #f8d7da;
+      color: #721c24;
+      border-left-color: #dc3545;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+
+      .event {
+        padding-left: 45px;
+      }
+
+      .timeline::before {
+        left: 15px;
+      }
+
+      .event::before {
+        left: 7px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <img src="assets/image/logo_castudio.png" alt="CAStudio Logo" class="header-logo">
+
+    <h1>Project 56</h1>
+    <p>板橋 ➔ 金瓜石 ➔ 九份 | 週五放學特攻</p>
+    <div class="tag">考後解放版 1/16</div>
+  </header>
+
+  <div class="container">
+
+    <div class="stats">
+      <div class="stat-box">
+        <i class="fas fa-clock"></i>
+        <span>12:30 出發</span>
+      </div>
+      <div class="stat-box">
+        <i class="fas fa-bus"></i>
+        <span>965 快速公車</span>
+      </div>
+      <div class="stat-box">
+        <i class="fas fa-mountain"></i>
+        <span>小百岳健行</span>
+      </div>
+      <div class="stat-box">
+        <i class="fas fa-utensils"></i>
+        <span>老街晚餐</span>
+      </div>
+    </div>
+
+    <div class="alert warning">
+      <i class="fas fa-exclamation-triangle"></i> <strong>雨天備案 (Plan B)：</strong><br>
+      若抵達金瓜石發現起霧或下雨，<strong>請取消爬基隆山！</strong>石階濕滑非常危險。改為在博物館園區深度遊，或提早去九份茶樓躲雨看霧景。
+    </div>
+
+    <h2 class="section-title">行程時間軸</h2>
+
+    <div class="timeline">
+      <div class="event">
+        <div class="time">12:10 - 12:30</div>
+        <div class="card">
+          <h3><i class="fas fa-school"></i> 放學 & 覓食</h3>
+          <p>在學校附近或便利商店買好午餐/麵包，帶著走。</p>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="time">12:30 - 14:20</div>
+        <div class="card">
+          <h3><i class="fas fa-bus-alt"></i> 捷運府中站 搭乘 965</h3>
+          <p><strong>上車地點：</strong>捷運府中站（千萬不要在板橋公車站搭，會沒位子！）</p>
+          <div class="note">
+            <i class="fas fa-coins"></i> <strong>票價 $90：</strong> 雖然貴，但保證有位子睡 1.5 小時，這對於剛考完試的我們是無價的！
+          </div>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="time">14:20 - 15:50</div>
+        <div class="card">
+          <h3><i class="fas fa-gem"></i> 金瓜石 (黃金博物館)</h3>
+          <p>下車先去上廁所。必看重點：</p>
+          <ul>
+            <li>四連棟日式建築</li>
+            <li><strong>黃金館：</strong>一定要摸那塊 2 億元的大金塊！沾財氣補考運。</li>
+          </ul>
+          <p><small>*注意：博物館 17:00 閉館，不要逗留太久。</small></p>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="time">16:00 - 17:30</div>
+        <div class="card">
+          <h3><i class="fas fa-hiking"></i> 挑戰基隆山 (小百岳)</h3>
+          <p>搭公車到「隔頂」站下車即登山口。</p>
+          <ul>
+            <li><strong>日落時間：</strong>約 17:21</li>
+            <li><strong>策略：</strong>全是階梯，爬到半山腰涼亭即可，不用攻頂。</li>
+            <li><strong>注意：</strong>山上風大，穿連帽外套，小心著涼。</li>
+          </ul>
+          <div class="img-placeholder" style="background-color: #eafaf1;">
+            <i class="fas fa-image"></i> &nbsp; [此處為基隆山步道照片]
+          </div>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="time">17:30 - 19:30</div>
+        <div class="card">
+          <h3><i class="fas fa-camera"></i> 九份老街 & 晚餐</h3>
+          <p>下山走 5 分鐘即達老街。此時紅燈籠全亮，氣氛最好。</p>
+          <ul>
+            <li><strong>必拍：</strong>阿妹茶樓（豎崎路）</li>
+            <li><strong>必吃：</strong>賴阿婆/阿柑姨芋圓、紅糟肉圓。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="time">20:00~</div>
+        <div class="card">
+          <h3><i class="fas fa-home"></i> 回家</h3>
+          <p><strong>方案 A (累了)：</strong> 搭 965 直達板橋 ($90, 睡覺)。<br>
+            <strong>方案 B (省錢)：</strong> 公車到瑞芳車站 ($15) 轉火車 ($49)。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-title">🎒 必備物品檢查表</h2>
+    <div style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+      <ul style="list-style: none; padding: 0;">
+        <li style="margin-bottom: 10px;"><input type="checkbox"> <strong>雨具：</strong> 摺疊傘 + 輕便雨衣 (山上風大傘會開花)</li>
+        <li style="margin-bottom: 10px;"><input type="checkbox"> <strong>外套：</strong> 有帽子的防風外套 (海風很冷)</li>
+        <li style="margin-bottom: 10px;"><input type="checkbox"> <strong>鞋子：</strong> 防滑好走的鞋 (千萬別穿拖鞋)</li>
+        <li style="margin-bottom: 10px;"><input type="checkbox"> <strong>錢/卡：</strong> 悠遊卡儲值至少 $300 (或 TPASS 月票)</li>
+        <li style="margin-bottom: 10px;"><input type="checkbox"> <strong>行動電源：</strong> 手機拍到沒電會很焦慮</li>
+      </ul>
+    </div>
+
+    <h2 class="section-title">💡 魔鬼細節</h2>
+    <div class="card">
+      <h4>1. 為什麼一定要在捷運府中站搭車？</h4>
+      <p>965 是熱門路線，如果在板橋公車站搭，週五下午很容易遇到客滿上不去，或者要分開坐。<strong>府中是起站</strong>，保證有連在一起的位子可以補眠。</p>
+
+      <h4>2. 關於天氣</h4>
+      <p>1月的九份/金瓜石有極高機率下雨。如果板橋天氣陰陰的，山上通常就是下雨。請務必下載「台北等公車」APP 隨時確認公車動態。</p>
+    </div>
+
+  </div>
+
+  <footer>
+    <img src="assets/image/logo.png" alt="C Logo" class="footer-logo">
+
+    <p>Project 56 | 祝週五放學大冒險成功！<br>
+      記得拍大金塊 ✨</p>
+
+    <p>Follow me on IG: <a href="https://www.instagram.com/pcet_chienan0617" target="_blank"><i
+          class="fab fa-instagram"></i> pcet_chienan0617</a></p>
+  </footer>
+
+</body>
+
+</html>
